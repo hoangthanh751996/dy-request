@@ -1,56 +1,56 @@
 "use strict";
 
-const rp = require("request-promise");
+const axios = require("axios");
 const logger = require("dy-logger");
 
 // Method call common
 function get(url, headers) {
     const options = {
-        method: 'GET',
-        uri: url,
+        method: 'get',
+        url,
         headers: headers || {},
-        json: true
+        responseType: 'json'
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponse)
         .catch(handleError);
 }
 
 function post(url, payload, headers) {
     const options = {
-        method: 'POST',
-        uri: url,
+        method: 'post',
+        url,
         headers: headers || {},
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponse)
         .catch(handleError);
 }
 
 function put(url, payload, headers) {
     const options = {
-        method: 'PUT',
-        uri: url,
+        method: 'put',
+        url,
         headers: headers || {},
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponse)
         .catch(handleError);
 }
 
 function deleteJson(url, payload, headers) {
     const options = {
-        method: 'DELETE',
-        uri: url,
+        method: 'delete',
+        url,
         headers: headers || {},
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponse)
         .catch(handleError);
 }
@@ -60,7 +60,7 @@ function handleResponse(res) {
 }
 
 function handleError(_err) {
-    logger.error("handleError", _err);
+    logger.error("handleError", _err.message);
     throw new Error(_err);
 }
 // ...
@@ -72,12 +72,12 @@ function getPrivate(url, secret) {
         "authorization": secret
     };
     const options = {
-        method: 'GET',
-        uri: url,
+        method: 'get',
+        url,
         headers: headers,
-        json: true
+        responseType: 'json'
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponsePrivate)
         .catch(handleErrorPrivate);
 }
@@ -87,13 +87,13 @@ function postPrivate(url, secret, payload) {
         "authorization": secret
     };
     const options = {
-        method: 'POST',
-        uri: url,
+        method: 'post',
+        url,
         headers: headers,
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponsePrivate)
         .catch(handleErrorPrivate);
 }
@@ -103,13 +103,13 @@ function putPrivate(url, secret, payload) {
         "authorization": secret
     };
     const options = {
-        method: 'PUT',
-        uri: url,
+        method: 'put',
+        url,
         headers: headers,
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponsePrivate)
         .catch(handleErrorPrivate);
 }
@@ -119,13 +119,13 @@ function deletePrivate(url, secret, payload) {
         "authorization": secret
     };
     const options = {
-        method: 'DELETE',
-        uri: url,
+        method: 'delete',
+        url,
         headers: headers,
-        body: payload,
-        json: true // Automatically parses the JSON string in the response
+        data: payload,
+        responseType: 'json' // Automatically parses the JSON string in the response
     };
-    return rp(options)
+    return axios(options)
         .then(handleResponsePrivate)
         .catch(handleErrorPrivate);
 }
@@ -139,7 +139,7 @@ function handleResponsePrivate(res) {
 }
 
 function handleErrorPrivate(_err) {
-    logger.error("handleError", _err);
+    logger.error("handleError", _err.message);
     throw new Error(_err);
 }
 // ...

@@ -1,6 +1,6 @@
 {
   "name": "dy-request",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "[https://github.com/hoangthanh751996/dy-request.git](https://github.com/hoangthanh751996/dy-request.git)",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/hoangthanh751996/dy-request#readme",
   "dependencies": {
-    "dy-logger": "^1.1.1",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "axios": "^0.21.0",
+    "dy-logger": "^1.1.1"
   }
 }
