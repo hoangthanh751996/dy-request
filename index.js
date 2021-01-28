@@ -56,7 +56,11 @@ function deleteJson(url, payload, headers) {
 }
 
 function handleResponse(res) {
-    return Promise.resolve(res);
+    if (res && res.data) {
+        return Promise.resolve(res.data);
+    } else {
+        throw new Error("Can not receive response from server. Please try again!");
+    }
 }
 
 function handleError(_err) {
@@ -131,10 +135,10 @@ function deletePrivate(url, secret, payload) {
 }
 
 function handleResponsePrivate(res) {
-    if (res.success) {
+    if (res && res.data) {
         return Promise.resolve(res.data);
     } else {
-        throw new Error(res.reason);
+        throw new Error("Can not receive response from server. Please try again!");
     }
 }
 
